@@ -39,6 +39,7 @@ pipeline {
                     else {
                         echo "Skipping deployment for branch ${env.BRANCH_NAME}"
                         currentBuild.result = 'UNSTABLE'
+                    }
                 }
             }
         }
