@@ -31,7 +31,7 @@ pipeline {
                 else if (env.BRANCH_NAME == 'uat') {
                     echo 'uat'
                 }
-                else if (env.BRANCH_NAME == 'prod') {
+                else if (env.BRANCH_NAME == 'prod1') {
                     echo 'prod'
                 }
                 else {
