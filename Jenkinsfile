@@ -37,8 +37,8 @@ pipeline {
                         // Additional actions for pull request branches
                     }
                     else {
-                        error("Skipping deployment for branch ${env.BRANCH_NAME}")
-                    }
+                        echo "Skipping deployment for branch ${env.BRANCH_NAME}"
+                        currentBuild.result = 'UNSTABLE'
                 }
             }
         }
