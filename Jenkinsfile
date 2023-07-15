@@ -23,26 +23,17 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    if (env.BRANCH_NAME.startsWith('dev/')) {
+                    if (env.BRANCH_NAME == 'main') {
                         echo 'dev'
-                    }
-                    else if (env.BRANCH_NAME == 'uat') {
+                    } else if (env.BRANCH_NAME == 'uat') {
                         echo 'uat'
-                    }
-                    else if (env.BRANCH_NAME == 'prod') {
+                    } else if (env.BRANCH_NAME == 'prod') {
                         echo 'prod'
-                    }
-                    else if (env.CHANGE_TARGET ==~ /refs\/pull\/.*\/merge/) {
-                        echo 'Pull request branch'
-                        // Additional actions for pull request branches
-                    }
-                    else {
+                    } else {
                         echo "Skipping deployment for branch ${env.BRANCH_NAME}"
-                        currentBuild.result = 'UNSTABLE'
                     }
                 }
             }
         }
     }
 }
-
