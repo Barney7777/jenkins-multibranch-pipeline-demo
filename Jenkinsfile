@@ -23,10 +23,7 @@ pipeline {
         stage('deploy') {
             steps {
                 script {
-                    if (env.BRANCH_NAME == 'main') {
-                        echo 'main'
-                    }
-                    else if (env.BRANCH_NAME.startsWith('dev/')) {
+                    if (env.BRANCH_NAME.startsWith('dev/')) {
                         echo 'dev'
                     }
                     else if (env.BRANCH_NAME == 'uat') {
@@ -34,6 +31,10 @@ pipeline {
                     }
                     else if (env.BRANCH_NAME == 'prod') {
                         echo 'prod'
+                    }
+                    else if (env.CHANGE_TARGET ==~ /refs\/pull\/.*\/merge/) {
+                        echo 'Pull request branch'
+                        // Additional actions for pull request branches
                     }
                     else {
                         error("Skipping deployment for branch ${env.BRANCH_NAME}")
@@ -43,3 +44,4 @@ pipeline {
         }
     }
 }
+
